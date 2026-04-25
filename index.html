@@ -1,186 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biblioteca K11</title>
-
-<style>
-body {margin:0;font-family:Arial;background:#0f172a;color:white;}
-
-header {
-padding:15px;
-background:#020617;
-text-align:center;
-}
-
-input {
-padding:8px;
-border:none;
-border-radius:8px;
-width:80%;
-margin-top:10px;
-}
-
-.start {
-background:#facc15;
-color:black;
-padding:12px;
-border:none;
-border-radius:10px;
-margin-top:10px;
-font-weight:bold;
-width:80%;
-}
-
-.grid {
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-gap:10px;
-padding:10px;
-}
-
-.card {
-background:#1e293b;
-border-radius:10px;
-overflow:hidden;
-cursor:pointer;
-}
-
-.card img {
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.card h3 {
-padding:10px;
-font-size:14px;
-}
-
-.leitor {
-display:none;
-padding:15px;
-}
-
-button {
-padding:10px;
-margin:5px;
-border:none;
-border-radius:8px;
-}
-
-.fav {background:#22c55e;}
-</style>
-
-<script>
-
-function abrir(id){
-  document.getElementById("home").style.display="none";
-  document.getElementById(id).style.display="block";
-  localStorage.setItem("ultimo", id);
-}
-
-function voltar(){
-  document.querySelectorAll(".leitor").forEach(e=>e.style.display="none");
-  document.getElementById("home").style.display="block";
-}
-
-function buscar(){
-  let v = document.getElementById("busca").value.toLowerCase();
-  document.querySelectorAll(".card").forEach(c=>{
-    c.style.display = c.innerText.toLowerCase().includes(v) ? "block":"none";
-  });
-}
-
-function favoritar(id){
-  let f = JSON.parse(localStorage.getItem("fav")||"[]");
-  if(!f.includes(id)){
-    f.push(id);
-    localStorage.setItem("fav", JSON.stringify(f));
-    alert("Favoritado!");
-  }
-}
-
-/* BOTÃO COMEÇAR A LER */
-function continuar(){
-  alert("💰 Aqui você pode colocar um anúncio depois!");
-
-  let ultimo = localStorage.getItem("ultimo");
-  if(ultimo){
-    abrir(ultimo);
-  } else {
-    alert("Escolha um livro primeiro 📚");
-  }
-}
-
-window.onload = continuar;
-
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Digital</title>
 </head>
-
 <body>
-
-<header>
-<h1>📚 Biblioteca K11</h1>
-
-<button onclick="continuar()" class="start">
-📖 Começar a Ler
-</button>
-
-<br>
-
-<input id="busca" placeholder="Buscar..." oninput="buscar()">
-
-</header>
-
-<div id="home" class="grid">
-
-<div class="card" onclick="abrir('livro1')">
-<img src="https://covers.openlibrary.org/b/id/8231856-L.jpg">
-<h3>Dom Casmurro</h3>
-</div>
-
-<div class="card" onclick="abrir('livro2')">
-<img src="https://covers.openlibrary.org/b/id/153541-L.jpg">
-<h3>1984</h3>
-</div>
-
-<div class="card" onclick="abrir('manga1')">
-<img src="https://cdn.myanimelist.net/images/manga/1/259070.jpg">
-<h3>Naruto</h3>
-</div>
-
-</div>
-
-<!-- LIVRO 1 -->
-<div id="livro1" class="leitor">
-<button onclick="voltar()">⬅ Voltar</button>
-<button class="fav" onclick="favoritar('livro1')">⭐ Favoritar</button>
-
-<h1>Dom Casmurro</h1>
-<p>Uma noite destas, vindo da cidade...</p>
-<p>(continua depois)</p>
-</div>
-
-<!-- LIVRO 2 -->
-<div id="livro2" class="leitor">
-<button onclick="voltar()">⬅ Voltar</button>
-<button class="fav" onclick="favoritar('livro2')">⭐ Favoritar</button>
-
-<h1>1984</h1>
-<p>Era um dia frio de abril...</p>
-</div>
-
-<!-- MANGA -->
-<div id="manga1" class="leitor">
-<button onclick="voltar()">⬅ Voltar</button>
-
-<img style="width:100%" src="https://i.imgur.com/8Km9tLL.jpg">
-<img style="width:100%" src="https://i.imgur.com/8Km9tLL.jpg">
-
-</div>
-
+    <h1>Biblioteca Digital</h1>
+    <div id="books">
+        <!-- Existing books -->
+        <div class="book">
+            <h2>Book Title 1</h2>
+            <img src="path/to/image1.jpg" alt="Book Title 1">
+            <p>Description of Book Title 1.</p>
+            <button class="favorite-btn">Add to Favorites</button>
+        </div>
+        <div class="book">
+            <h2>Book Title 2</h2>
+            <img src="path/to/image2.jpg" alt="Book Title 2">
+            <p>Description of Book Title 2.</p>
+            <button class="favorite-btn">Add to Favorites</button>
+        </div>
+        <!-- Many more books -->
+        <div class="book">
+            <h2>New Book Title 3</h2>
+            <img src="path/to/image3.jpg" alt="New Book Title 3">
+            <p>Description of New Book Title 3.</p>
+            <button class="favorite-btn">Add to Favorites</button>
+        </div>
+        <div class="book">
+            <h2>New Book Title 4</h2>
+            <img src="path/to/image4.jpg" alt="New Book Title 4">
+            <p>Description of New Book Title 4.</p>
+            <button class="favorite-btn">Add to Favorites</button>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.favorite-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                button.classList.toggle('favorited');
+                alert('Favorite status changed!');
+            });
+        });
+    </script>
 </body>
 </html>
